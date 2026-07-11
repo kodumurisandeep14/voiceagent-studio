@@ -29,12 +29,14 @@ Businesses can upload documents such as menus, service catalogs, FAQs, manuals, 
 - JWT Authentication
 - User Registration API
 - User Login API
+- Current User API
+- Business Management APIs
+- Document Management APIs
 
 ## 🔄 Currently Working On
 
-- Current User API
-- Business Management APIs
 - Workspace Management
+- AI Knowledge Base (Embeddings & Vector Search)
 
 ---
 
@@ -280,6 +282,31 @@ voiceagent-studio/
 |----------|----------------|----------------------|
 | POST | /users/register | Register new user |
 | POST | /users/login | Login user |
+| GET | /users/me | Get current logged-in user |
+
+---
+
+## Business Management
+
+| Method | Endpoint | Description |
+|----------|------------------------|----------------------|
+| POST | /businesses/ | Create a business |
+| GET | /businesses/ | List my businesses |
+| GET | /businesses/{business_id} | Get business by ID |
+| PUT | /businesses/{business_id} | Update business |
+| DELETE | /businesses/{business_id} | Delete business |
+
+---
+
+## Document Management
+
+| Method | Endpoint | Description |
+|----------|------------------------------------|----------------------|
+| POST | /documents/ | Upload a document |
+| GET | /documents/business/{business_id} | List documents for a business |
+| GET | /documents/{document_id} | Get document by ID |
+| PUT | /documents/{document_id} | Update document |
+| DELETE | /documents/{document_id} | Delete document |
 
 ---
 
@@ -319,10 +346,10 @@ This project demonstrates production-ready AI Engineering practices, including:
 |---------|---------------------------|-------------|
 | Phase 1 | Planning & Documentation | ✅ Completed |
 | Phase 2 | Backend Foundation | ✅ Completed |
-| Phase 3 | Authentication & User Management | 🔄 In Progress |
-| Phase 4 | Business Management | ⏳ Planned |
-| Phase 5 | Document Management | ⏳ Planned |
-| Phase 6 | AI Knowledge Base | ⏳ Planned |
+| Phase 3 | Authentication & User Management | ✅ Completed |
+| Phase 4 | Business Management | ✅ Completed |
+| Phase 5 | Document Management | ✅ Completed |
+| Phase 6 | AI Knowledge Base | 🔄 In Progress |
 | Phase 7 | AI Chat Assistant | ⏳ Planned |
 | Phase 8 | AI Voice Agent | ⏳ Planned |
 | Phase 9 | Analytics Dashboard | ⏳ Planned |
@@ -346,11 +373,11 @@ This project demonstrates production-ready AI Engineering practices, including:
 - [x] JWT Authentication
 - [x] User Registration
 - [x] User Login
-- [ ] Current User Endpoint
-- [ ] Business CRUD APIs
+- [x] Current User Endpoint
+- [x] Business CRUD APIs
+- [x] Document CRUD APIs
 - [ ] Workspace Management
-- [ ] Document Upload
-- [ ] Document Processing
+- [ ] Document Processing (Parsing & Chunking)
 - [ ] Embedding Generation
 - [ ] Vector Database Integration
 - [ ] RAG Pipeline
