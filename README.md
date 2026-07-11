@@ -1,440 +1,348 @@
 # 🎙️ VoiceAgent Studio
 
-![Status](https://img.shields.io/badge/status-in%20development-orange)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
-![React](https://img.shields.io/badge/React-Frontend-61DAFB)
+An AI-powered Voice Agent platform built with **FastAPI**, **PostgreSQL**, and **SQLAlchemy**.
 
-VoiceAgent Studio is a production-ready multi-tenant AI Voice Agent platform that enables businesses to create intelligent AI voice assistants without writing code.
-
-Businesses can upload documents such as menus, service catalogs, FAQs, manuals, pricing guides, and policies. The platform automatically builds an AI-powered knowledge base using Retrieval-Augmented Generation (RAG), allowing voice agents to answer customer questions, schedule appointments, and automate routine business workflows.
+The goal of this project is to build a production-ready platform where businesses can upload knowledge documents, create AI voice agents, and interact with customers using Retrieval-Augmented Generation (RAG) and Large Language Models.
 
 ---
 
-# 🚧 Project Status
+# 🚀 Current Progress
 
-## ✅ Completed
+## ✅ Phase 1 - Project Setup
 
-- Project Planning
-- Software Requirements Specification (SRS)
-- System Architecture
-- Database Design
-- API Design
-- Development Roadmap
-- FastAPI Backend Setup
-- PostgreSQL Integration
+- FastAPI Backend
+- PostgreSQL Database
 - SQLAlchemy ORM
 - Alembic Database Migrations
-- JWT Authentication
-- User Registration API
-- User Login API
-- Current User API
-- Business Management APIs
-- Document Management APIs
-
-## 🔄 Currently Working On
-
-- Workspace Management
-- AI Knowledge Base (Embeddings & Vector Search)
+- Swagger UI
+- Layered Project Architecture
 
 ---
 
-# 🚀 Vision
+## ✅ Phase 2 - Authentication
 
-Enable businesses of any size to deploy AI-powered voice agents that answer customer questions, automate routine interactions, and integrate with business workflows—all without building custom AI solutions.
+Implemented secure JWT Authentication.
 
-Instead of developing a custom chatbot or voice assistant for every business, VoiceAgent Studio provides a reusable platform where users can:
+### Features
 
-- Create business workspaces
-- Upload business documents
-- Build AI knowledge bases
-- Configure AI behavior
-- Connect voice providers
-- Deploy AI-powered voice assistants
-
----
-
-# ✨ Features
-
-## Authentication
-
-- JWT Authentication
 - User Registration
-- Secure Login
-- Password Hashing
-- Protected API Routes
+- User Login
+- Password Hashing (bcrypt)
+- JWT Token Generation
+- OAuth2 Authentication
+- Protected Routes
+- Current Logged-in User Endpoint
 
----
+### APIs
 
-## Business Management
-
-- Multi-tenant SaaS Architecture
-- Multiple Business Workspaces
-- User Authentication
-- Role-Based Access Control
-
----
-
-## Knowledge Base
-
-- Upload PDF, DOCX, TXT, CSV
-- Automatic Document Parsing
-- Intelligent Text Chunking
-- Embedding Generation
-- Vector Search
-- Retrieval-Augmented Generation (RAG)
-
----
-
-## AI Assistant
-
-- Context-aware Conversations
-- Intelligent Question Answering
-- Conversation Memory
-- Conversation History
-- Source-aware Responses
-
----
-
-## Voice AI
-
-- Speech-to-Text
-- Text-to-Speech
-- AI Phone Calls
-- Natural Conversations
-- Human Handoff
-
----
-
-## Integrations
-
-- Google Calendar
-- Outlook Calendar
-- Gmail
-- Twilio
-- Vapi
-- Stripe (Planned)
-- Salesforce (Planned)
-- HubSpot (Planned)
-
----
-
-## Dashboard
-
-- Business Management
-- Document Management
-- Conversation History
-- Analytics Dashboard
-- Settings
-
----
-
-# 🏛 System Architecture
-
-```text
-                         Business Owner
-                               │
-                         React Dashboard
-                               │
-                        FastAPI REST API
-                               │
-        ┌──────────────────────┼──────────────────────┐
-        │                      │                      │
-   PostgreSQL           Object Storage          AI Services
-        │                      │                      │
-   Business Data      Uploaded Documents       OpenAI API
-                                                LangGraph
-                                              RAG Pipeline
-                               │
-                        Voice Providers
-                 (Vapi / Twilio / Deepgram)
-                               │
-                         Customer Phone Call
+```
+POST   /users/register
+POST   /users/login
+GET    /users/me
 ```
 
 ---
 
-# 🏗 Example Use Cases
+## ✅ Phase 3 - Business Management
 
-## 🍽 Restaurant
+Businesses can manage their own AI workspace.
 
-Upload:
+### Features
 
-- Menu
-- Opening Hours
-- Reservation Policy
+- Create Business
+- Get Business
+- Update Business
+- Delete Business
+- Business Ownership Validation
+- JWT Protected APIs
 
-Customers can ask:
+### APIs
 
-- What vegan dishes do you have?
-- Book a table for four.
-- Are you open on Sunday?
-- What desserts do you offer?
-
----
-
-## 🏗 Construction Company
-
-Upload:
-
-- Service Catalog
-- Pricing Guide
-- FAQs
-- Safety Documents
-
-Customers can ask:
-
-- Do you install roofing?
-- Schedule an estimate.
-- What areas do you serve?
-- What warranty do you provide?
+```
+POST    /businesses/
+GET     /businesses/
+GET     /businesses/{business_id}
+PUT     /businesses/{business_id}
+DELETE  /businesses/{business_id}
+```
 
 ---
 
-## 🦷 Dental Clinic
+## ✅ Phase 4 - Document Management (Metadata)
 
-Upload:
+Implemented complete CRUD operations for business documents.
 
-- Insurance Providers
-- Pricing
-- Office Policies
+Currently stores document metadata inside PostgreSQL.
 
-Customers can ask:
+### Features
 
-- Do you accept Delta Dental?
-- Book an appointment.
-- How much is a cleaning?
+- Create Document
+- Get Document
+- List Documents
+- Update Document
+- Delete Document
+- Business Ownership Validation
 
----
+### APIs
 
-## 🏠 Real Estate
-
-Upload:
-
-- Property Listings
-- Agent Information
-- FAQs
-
-Customers can ask:
-
-- Show available apartments
-- Schedule a visit
-- Property pricing
+```
+POST    /documents/
+GET     /documents/business/{business_id}
+GET     /documents/{document_id}
+PUT     /documents/{document_id}
+DELETE  /documents/{document_id}
+```
 
 ---
 
-# 🛠 Technology Stack
+# 🏗️ Project Architecture
 
-| Layer | Technology |
-|--------|------------|
-| Frontend | React, TypeScript, Tailwind CSS |
-| Backend | FastAPI |
-| ORM | SQLAlchemy |
-| Database | PostgreSQL |
-| Migrations | Alembic |
-| Authentication | JWT, Passlib, bcrypt |
-| AI | OpenAI API, LangGraph |
-| Knowledge Base | RAG |
-| Vector Database | Pinecone (Planned) |
-| Voice | Vapi, Deepgram, ElevenLabs |
-| Storage | Amazon S3 |
-| DevOps | Docker, GitHub Actions |
+```
+Client
+   │
+   ▼
+FastAPI API
+   │
+   ▼
+Service Layer
+   │
+   ▼
+Repository Layer
+   │
+   ▼
+SQLAlchemy ORM
+   │
+   ▼
+PostgreSQL
+```
 
 ---
 
 # 📁 Project Structure
 
-```text
-voiceagent-studio/
-
-├── backend/
-│   ├── alembic/
-│   ├── app/
-│   │   ├── api/
-│   │   ├── core/
-│   │   ├── db/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── repositories/
-│   │   ├── schemas/
-│   │   ├── services/
-│   │   ├── workers/
-│   │   └── main.py
-│   │
-│   ├── requirements.txt
-│   └── Dockerfile
+```
+backend/
 │
-├── frontend/
-├── docs/
-├── tests/
-├── README.md
-└── docker-compose.yml
+├── alembic/
+│
+├── app/
+│   ├── api/
+│   ├── core/
+│   ├── db/
+│   ├── models/
+│   ├── repositories/
+│   ├── schemas/
+│   ├── services/
+│   └── main.py
+│
+├── requirements.txt
+└── .env
 ```
 
 ---
 
-# 🚀 Implemented APIs
+# 🛠️ Technology Stack
+
+## Backend
+
+- FastAPI
+- Python 3.11
+- SQLAlchemy
+- Alembic
+- Pydantic
+
+## Database
+
+- PostgreSQL
 
 ## Authentication
 
-| Method | Endpoint | Description |
-|----------|----------------|----------------------|
-| POST | /users/register | Register new user |
-| POST | /users/login | Login user |
-| GET | /users/me | Get current logged-in user |
+- JWT
+- OAuth2
+- Passlib
+- bcrypt
+
+## Documentation
+
+- Swagger UI
+- OpenAPI
+
+## Version Control
+
+- Git
+- GitHub
 
 ---
 
-## Business Management
+# 🔐 Authentication Flow
 
-| Method | Endpoint | Description |
-|----------|------------------------|----------------------|
-| POST | /businesses/ | Create a business |
-| GET | /businesses/ | List my businesses |
-| GET | /businesses/{business_id} | Get business by ID |
-| PUT | /businesses/{business_id} | Update business |
-| DELETE | /businesses/{business_id} | Delete business |
-
----
-
-## Document Management
-
-| Method | Endpoint | Description |
-|----------|------------------------------------|----------------------|
-| POST | /documents/ | Upload a document |
-| GET | /documents/business/{business_id} | List documents for a business |
-| GET | /documents/{document_id} | Get document by ID |
-| PUT | /documents/{document_id} | Update document |
-| DELETE | /documents/{document_id} | Delete document |
-
----
-
-## System
-
-| Method | Endpoint | Description |
-|----------|---------------|----------------|
-| GET | / | Root |
-| GET | /health | Health Check |
-| GET | /db-test | PostgreSQL Test |
+```
+Register
+      │
+      ▼
+Store User
+      │
+      ▼
+Login
+      │
+      ▼
+Generate JWT
+      │
+      ▼
+Swagger OAuth2
+      │
+      ▼
+Protected APIs
+```
 
 ---
 
-# 🎯 Repository Goals
+# 🗄️ Database Tables
 
-This project demonstrates production-ready AI Engineering practices, including:
+Current tables
 
-- FastAPI REST APIs
+- users
+- businesses
+- documents
+- conversations
+- messages
+
+---
+
+# ✅ Completed Features
+
 - JWT Authentication
+- OAuth2 Integration
+- User Registration
+- User Login
+- Current User Endpoint
+- Business CRUD
+- Document CRUD
 - SQLAlchemy ORM
-- Alembic Database Migrations
 - PostgreSQL Integration
+- Alembic Migrations
 - Repository Pattern
-- Service Layer Architecture
-- Multi-tenant SaaS Design
-- Retrieval-Augmented Generation (RAG)
-- AI Voice Agents
-- Docker Deployment
-- CI/CD
-- Clean Architecture
+- Service Layer
+- API Documentation using Swagger
 
 ---
 
-# 📅 Development Phases
+# 🚧 Roadmap
 
-| Phase | Description | Status |
-|---------|---------------------------|-------------|
-| Phase 1 | Planning & Documentation | ✅ Completed |
-| Phase 2 | Backend Foundation | ✅ Completed |
-| Phase 3 | Authentication & User Management | ✅ Completed |
-| Phase 4 | Business Management | ✅ Completed |
-| Phase 5 | Document Management | ✅ Completed |
-| Phase 6 | AI Knowledge Base | 🔄 In Progress |
-| Phase 7 | AI Chat Assistant | ⏳ Planned |
-| Phase 8 | AI Voice Agent | ⏳ Planned |
-| Phase 9 | Analytics Dashboard | ⏳ Planned |
-| Phase 10 | Third-party Integrations | ⏳ Planned |
-| Phase 11 | Docker Deployment | ⏳ Planned |
-| Phase 12 | CI/CD | ⏳ Planned |
+## Phase 5 - File Upload
+
+- Upload PDF
+- Upload DOCX
+- Upload TXT
+- Local File Storage
+- AWS S3 Integration
 
 ---
 
-# 📌 Development Roadmap
+## Phase 6 - RAG Pipeline
 
-- [x] Project Planning
-- [x] Software Requirements Specification
-- [x] System Architecture
-- [x] Database Schema
-- [x] API Design
-- [x] FastAPI Backend
-- [x] PostgreSQL Database
-- [x] SQLAlchemy ORM
-- [x] Alembic Migrations
-- [x] JWT Authentication
-- [x] User Registration
-- [x] User Login
-- [x] Current User Endpoint
-- [x] Business CRUD APIs
-- [x] Document CRUD APIs
-- [ ] Workspace Management
-- [ ] Document Processing (Parsing & Chunking)
-- [ ] Embedding Generation
-- [ ] Vector Database Integration
-- [ ] RAG Pipeline
-- [ ] AI Chat Assistant
-- [ ] Voice Integration
-- [ ] Analytics Dashboard
-- [ ] Docker Deployment
-- [ ] GitHub Actions CI/CD
+- Text Extraction
+- Chunking
+- Embeddings
+- Vector Database
+- Semantic Search
+- Retrieval-Augmented Generation
 
 ---
 
-# 📄 Documentation
+## Phase 7 - Voice Agent
 
-Detailed documentation is available in the **docs/** directory.
-
-- Software Requirements Specification
-- Architecture
-- Database Schema
-- API Design
-- Development Roadmap
-- Implementation Plan
+- Speech-to-Text
+- LLM Integration
+- Text-to-Speech
+- Real-time Voice Conversation
 
 ---
 
-# 🤝 Contributing
+## Phase 8 - Analytics
 
-Contributions are welcome.
-
-If you'd like to contribute, please open an issue before submitting a pull request.
-
----
-
-# 🔮 Future Enhancements
-
-- Multi-language Support
-- Voice Cloning
-- AI Workflow Builder
-- WhatsApp Integration
-- Slack Integration
-- Microsoft Teams Integration
-- White-label Deployment
-- Billing & Subscription
-- Team Collaboration
-- AI Prompt Builder
-- AI Call Summaries
-- Sentiment Analysis
+- Call Logs
+- Conversation History
+- Business Dashboard
+- Usage Analytics
 
 ---
 
-# 📜 License
+# ▶️ Running the Project
 
-This project is licensed under the MIT License.
+## Clone Repository
+
+```bash
+git clone https://github.com/kodumurisandeep14/voiceagent-studio.git
+```
 
 ---
 
-# ⭐ Star the Repository
+## Backend
 
-If you find this project useful, consider giving it a ⭐ on GitHub.
+```bash
+cd backend
+```
 
-It helps others discover the project and motivates continued development.
+Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+Activate
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Run migrations
+
+```bash
+alembic upgrade head
+```
+
+Start the server
+
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+# 📚 API Documentation
+
+Swagger UI
+
+```
+http://127.0.0.1:8000/docs
+```
+
+ReDoc
+
+```
+http://127.0.0.1:8000/redoc
+```
+
+---
+
+# 👨‍💻 Author
+
+**Sandeep Kodumuri**
+
+GitHub:
+https://github.com/kodumurisandeep14
+
+---
+
+# 📄 License
+
+This project is developed for educational purposes and as a portfolio project demonstrating modern AI backend development using FastAPI, PostgreSQL, and Retrieval-Augmented Generation (RAG).
