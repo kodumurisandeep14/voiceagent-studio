@@ -17,3 +17,9 @@ class User(Base):
         back_populates="user",
         cascade="all, delete"
     )
+
+    businesses = relationship(
+        "Business",
+        back_populates="owner",
+        cascade="all, delete"
+    )
